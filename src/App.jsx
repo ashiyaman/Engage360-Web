@@ -1,19 +1,29 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import './App.css'
 
+import Body from './components/Body'
+import Dashboard from './pages/Dashboard'
+import LeadManagement from './pages/LeadManagement'
+import Sales from './pages/Sales'
+import Agents from './pages/Agents'
+import Settings from './pages/Settings'
+import Reports from './pages/Reports'
+
 function App() {
-  const [count, setCount] = useState(0)
 
   return (
-    <>
-      <div className="min-h-screen flex items-center justify-center bg-slate-100">
-      <h1 className="text-4xl font-bold text-indigo-600">
-        Tailwind v4 is working 🚀
-      </h1>
-    </div>
-    </>
+    <Router basename='/'>
+      <Routes>
+        <Route path='/' element={<Body/>}>
+          <Route path='/' element={<Dashboard/>}></Route>
+          <Route path='/leads' element={<LeadManagement/>}></Route>
+          <Route path='/sales' element={<Sales/>}></Route>
+          <Route path='/agents' element={<Agents/>}></Route>
+          <Route path='/reports' element={<Reports/>}></Route>
+          <Route path='/settings' element={<Settings/>}></Route>
+        </Route>
+      </Routes>
+    </Router>
   )
 }
 
