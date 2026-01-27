@@ -19,7 +19,6 @@ function App() {
   
       const fetchLeads = async() => {
           const getLeadsData = await axios.get(`${BASE_URL}/leads`)
-          console.log(getLeadsData)
           setLeads(getLeadsData.data)
       }
   
