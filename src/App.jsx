@@ -1,6 +1,10 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
-import './App.css'
+import { useState, useEffect } from 'react'
+import axios from 'axios'
 
+import {BASE_URL} from "./utils/constants"
+import { LeadContext } from './contexts/LeadContext'
+import './App.css'
 import Body from './components/Body'
 import Dashboard from './pages/Dashboard'
 import LeadManagement from './pages/LeadManagement'
@@ -11,7 +15,20 @@ import Reports from './pages/Reports'
 
 function App() {
 
+      const [leads, setLeads] = useState([])
+  
+      const fetchLeads = async() => {
+          const getLeadsData = await axios.get(`${BASE_URL}/leads`)
+          console.log(getLeadsData)
+          setLeads(getLeadsData.data)
+      }
+  
+      useEffect(() => {
+          fetchLeads()
+      }, [])
+
   return (
+    <LeadContext.Provider value={{leads: leads}}>
     <Router basename='/'>
       <Routes>
         <Route path='/' element={<Body/>}>
@@ -24,6 +41,7 @@ function App() {
         </Route>
       </Routes>
     </Router>
+    </LeadContext.Provider>
   )
 }
 
