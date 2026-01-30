@@ -2,6 +2,7 @@ import { useContext, useMemo, useState } from "react"
 
 import { LeadContext } from "../contexts/LeadContext"
 import StatsBar from "../components/StatsBar"
+import LeadMomentum from "../components/leadMomentum"
 
 const Dashboard = () => {
     const {leads} = useContext(LeadContext)
@@ -20,6 +21,7 @@ const Dashboard = () => {
             <h1>Dashboard</h1>
             <section className="bg-yellow-300">
                 <StatsBar stats={stats} />
+                <LeadMomentum />
             </section>
             <ul>
                 {leads && leads.map(lead => (<li key={lead._id} className="border-2 m-2">
