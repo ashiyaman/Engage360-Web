@@ -1,18 +1,7 @@
 import { useContext, useMemo } from "react";
 import { LeadContext } from "../contexts/LeadContext";
 
-const Stats = () => {
-  const { leads } = useContext(LeadContext);
-
-  const stats = useMemo(
-    () =>
-      (leads || []).reduce((acc, lead) => {
-        acc[lead.status] = (acc[lead.status] || 0) + 1;
-        return acc;
-      }, {}),
-    [leads],
-  );
-
+const StatsBar = ({stats}) => {
   return (
     <>
       <h2>Stats</h2>
@@ -27,4 +16,4 @@ const Stats = () => {
   );
 };
 
-export default Stats;
+export default StatsBar;

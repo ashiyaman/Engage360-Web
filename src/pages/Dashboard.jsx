@@ -1,16 +1,25 @@
-import { useContext, useEffect, useState } from "react"
+import { useContext, useMemo, useState } from "react"
 
 import { LeadContext } from "../contexts/LeadContext"
-import Stats from "../components/Stats"
+import StatsBar from "../components/StatsBar"
 
 const Dashboard = () => {
     const {leads} = useContext(LeadContext)
+
+      const stats = useMemo(
+    () =>
+      (leads || []).reduce((acc, lead) => {
+        acc[lead.status] = (acc[lead.status] || 0) + 1;
+        return acc;
+      }, {}),
+    [leads],
+  );
 
     return(
         <div>
             <h1>Dashboard</h1>
             <section className="bg-yellow-300">
-                <Stats />
+                <StatsBar stats={stats} />
             </section>
             <ul>
                 {leads && leads.map(lead => (<li key={lead._id} className="border-2 m-2">
