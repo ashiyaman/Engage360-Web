@@ -3,7 +3,7 @@ import LeadManagement from "../pages/LeadManagement"
 
 const Sidebar = () => {
     return(
-        <aside className="flex flex-col left-0">
+        <aside className="flex flex-col left-0 bg-gray-400">
             <h1>Sidebar</h1>
             <Link to='/leads'>Leads</Link>
             <Link to='/sales'>Sales</Link>

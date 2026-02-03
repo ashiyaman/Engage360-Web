@@ -3,6 +3,7 @@ import { useContext, useMemo, useState } from "react"
 import { LeadContext } from "../contexts/LeadContext"
 import StatsBar from "../components/StatsBar"
 import LeadMomentum from "../components/leadMomentum"
+import FunnelComponent from "../components/FunnelComponent"
 
 const Dashboard = () => {
     const {leads} = useContext(LeadContext)
@@ -23,7 +24,8 @@ const Dashboard = () => {
                 <StatsBar stats={stats} />
                 <LeadMomentum />
             </section>
-            <ul>
+            <FunnelComponent stats={stats} />
+            <ul className="bg-blue-500">
                 {leads && leads.map(lead => (<li key={lead._id} className="border-2 m-2">
                     <h5>{lead.name}</h5>
                     <p>Status: {lead.status}</p>
