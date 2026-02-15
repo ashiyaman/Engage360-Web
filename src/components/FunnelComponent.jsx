@@ -1,7 +1,7 @@
 import { FUNNEL_STAGES } from "../utils/constants";
 
 const FunnelComponent = ({ stats }) => {
-  console.log(stats);
+  //console.log(stats);
 
   return (
     <>
@@ -10,12 +10,14 @@ const FunnelComponent = ({ stats }) => {
         <ul>
           {FUNNEL_STAGES.map((stage) => {
             const statusCount = stats[stage];
+            console.log(statusCount)
             return (
-              <li>
+              <li className="flex flex-row">
                 <span>{stage}: </span>{" "}
-                <span className="font-extrabold w-5xl">
-                  [{Array(stats[stage]).fill("|").join(" ")}] {stats[stage] || 0}
-                </span>
+                  <div 
+                  style={{width: `${stats[stage] * 10}px`}} className="font-extrabold h-3 bg-amber-50">
+                </div>
+                
               </li>
             );
           })}
