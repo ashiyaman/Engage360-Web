@@ -1,7 +1,6 @@
 import { FUNNEL_STAGES } from "../utils/constants";
 
 const FunnelComponent = ({ stats }) => {
-  //console.log(stats);
 
   return (
     <>
@@ -10,7 +9,6 @@ const FunnelComponent = ({ stats }) => {
         <ul>
           {FUNNEL_STAGES.map((stage) => {
             const statusCount = stats[stage];
-            console.log(statusCount)
             return (
               <li className="flex flex-row">
                 <span>{stage}: </span>{" "}
