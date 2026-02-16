@@ -1,18 +1,7 @@
 import { useContext } from "react";
 import { LeadContext } from "../contexts/LeadContext";
 
-const ONE_WEEK_MS = 7 * 24 * 60 * 60 * 1000;
-
-const LeadMomentum = () => {
-  const { leads = [] } = useContext(LeadContext);
-
-  const forwardedLeads = leads.filter((lead) => {
-    const updatedAt = new Date(lead.updatedAt).getTime();
-
-    if (isNaN(updatedAt)) return 0;
-
-    return Date.now() - updatedAt < ONE_WEEK_MS;
-  });
+const LeadMomentum = ({forwardedLeads, stalledLeads}) => {
 
   return (
     <>
@@ -23,7 +12,7 @@ const LeadMomentum = () => {
             <span>▲</span> {forwardedLeads.length} leads moved forward this week
           </p>
           <p>
-            <span>▼</span> {leads.length - forwardedLeads.length} leads stalled
+            <span>▼</span> {stalledLeads} leads stalled
           </p>
         </section>
       )}
