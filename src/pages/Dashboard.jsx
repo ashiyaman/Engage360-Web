@@ -17,12 +17,12 @@ const Dashboard = () => {
     const forwardedLeads = leads.filter((lead) => {
       const updatedAt = new Date(lead.updatedAt).getTime();
       if (isNaN(updatedAt)) return 0;
-      return Date.now() - updatedAt < ONE_WEEK_MS;
+      return ((Date.now() - updatedAt < ONE_WEEK_MS) && lead.status !== "Closed")
     });
 
     const stalledPriorityLeads = leads.filter(lead => lead.priority === "High")
 
-    const stalledLeads = leads.length - forwardedLeads.length
+    const stalledLeadsCount = leads.length - forwardedLeads.length
 
     const stats = (leads || []).reduce((acc, lead) => {
       acc[lead.status] = (acc[lead.status] || 0) + 1;
@@ -33,7 +33,7 @@ const Dashboard = () => {
       stats,
       forwardedLeads,
       stalledPriorityLeads,
-      stalledLeads
+      stalledLeadsCount
     }
   }, [leads]);
 
@@ -59,7 +59,7 @@ const Dashboard = () => {
         <AttentionPanel 
           forwardedLeads = {analytics.forwardedLeads}
           stalledPriorityLeads = {analytics.stalledPriorityLeads}
-          stalledLeads = {analytics.stalledLeads}
+          stalledLeadsCount = {analytics.stalledLeadsCount}
         />
       </>
     </div>

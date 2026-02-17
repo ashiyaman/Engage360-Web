@@ -1,21 +1,21 @@
 import { useContext } from "react";
 import { LeadContext } from "../contexts/LeadContext";
 
-const LeadMomentum = ({forwardedLeads, stalledLeads}) => {
+const LeadMomentum = ({forwardedLeads, stalledLeadsCount}) => {
 
   return (
     <>
-      {leads && (
+
         <section className="bg-green-500">
           <h3>Lead Momentum(past 7 days)</h3>
           <p>
             <span>▲</span> {forwardedLeads.length} leads moved forward this week
           </p>
           <p>
-            <span>▼</span> {stalledLeads} leads stalled
+            <span>▼</span> {stalledLeadsCount} leads stalled
           </p>
         </section>
-      )}
+      
     </>
   );
 };
