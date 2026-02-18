@@ -5,6 +5,7 @@ import StatsBar from "../components/StatsBar";
 import LeadMomentum from "../components/leadMomentum";
 import FunnelComponent from "../components/FunnelComponent";
 import AttentionPanel from "../components/AttentionPanel";
+import ActivityFeed from "../components/ActivityFeed";
 
 import { ONE_WEEK_MS } from "../utils/constants";
 
@@ -62,6 +63,7 @@ const Dashboard = () => {
           stalledLeadsCount = {analytics.stalledLeadsCount}
         />
       </>
+      <ActivityFeed />
     </div>
   );
 };
