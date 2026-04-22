@@ -12,19 +12,20 @@ import Sales from './pages/Sales'
 import Agents from './pages/Agents'
 import Settings from './pages/Settings'
 import Reports from './pages/Reports'
+import LeadDetails from './components/leads/LeadDetails'
 
 function App() {
 
-      const [leads, setLeads] = useState([])
-  
-      const fetchLeads = async() => {
-          const getLeadsData = await axios.get(`${BASE_URL}/leads`)
-          setLeads(getLeadsData.data)
-      }
-  
-      useEffect(() => {
-          fetchLeads()
-      }, [])
+  const [leads, setLeads] = useState([])
+
+  const fetchLeads = async() => {
+      const getLeadsData = await axios.get(`${BASE_URL}/leads`)
+      setLeads(getLeadsData.data)
+  }
+
+  useEffect(() => {
+      fetchLeads()
+  }, [])
 
   return (
     <LeadContext.Provider value={{leads: leads}}>
@@ -37,6 +38,7 @@ function App() {
           <Route path='/agents' element={<Agents/>}></Route>
           <Route path='/reports' element={<Reports/>}></Route>
           <Route path='/settings' element={<Settings/>}></Route>
+          <Route path='/leads/:leadId' element={<LeadDetails />}></Route>
         </Route>
       </Routes>
     </Router>

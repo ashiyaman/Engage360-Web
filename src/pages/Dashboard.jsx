@@ -8,6 +8,7 @@ import AttentionPanel from "../components/AttentionPanel";
 import ActivityFeed from "../components/ActivityFeed";
 
 import { ONE_WEEK_MS } from "../utils/constants";
+import LeadList from "../components/leads/LeadList";
 
 const Dashboard = () => {
   const { leads } = useContext(LeadContext);
@@ -47,7 +48,8 @@ const Dashboard = () => {
       </section>
       <FunnelComponent stats={analytics.stats} />
       <>
-        <ul className="bg-blue-500">
+      <LeadList />
+        {/* <ul className="bg-blue-500">
           {leads &&
             leads.map((lead) => (
               <li key={lead._id} className="border-2 m-2">
@@ -56,7 +58,7 @@ const Dashboard = () => {
                 <p>Priority: {lead.priority}</p>
               </li>
             ))}
-        </ul>
+        </ul> */}
         <AttentionPanel 
           forwardedLeads = {analytics.forwardedLeads}
           stalledPriorityLeads = {analytics.stalledPriorityLeads}

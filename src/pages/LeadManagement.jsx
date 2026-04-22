@@ -1,7 +1,10 @@
+import LeadList from "../components/leads/LeadList"
+
 const LeadManagement = () => {
     return(
         <div>
-            Lead Management
+            <h3>Lead Management</h3>
+            <LeadList />
         </div>
     )
 }
