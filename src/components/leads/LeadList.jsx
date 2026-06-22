@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 const LeadList = () => {
   const { leads } = useContext(LeadContext);
-  console.log('...lead list........', leads);
+
   return (
     <ul>
       {leads.map((lead) => (

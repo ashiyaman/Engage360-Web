@@ -8,4 +8,19 @@ export const FUNNEL_STAGES = [
     "Closed"
 ]
 
+export const SOURCES = [
+    'Website', 
+    'Referral', 
+    'Cold Call', 
+    'Advertisement', 
+    'Email', 
+    'Other'
+]
+
+export const PRIORITY = [
+    'High', 
+    'Medium', 
+    'Low'
+]
+
 export const ONE_WEEK_MS = 7 * 24 * 60 * 60 * 1000;

@@ -19,10 +19,20 @@ const Dashboard = () => {
     const forwardedLeads = leads.filter((lead) => {
       const updatedAt = new Date(lead.updatedAt).getTime();
       if (isNaN(updatedAt)) return 0;
-      return ((Date.now() - updatedAt < ONE_WEEK_MS) && lead.status !== "Closed")
+      return (
+        lead.status !== "Closed" &&
+        Date.now() - updatedAt < ONE_WEEK_MS)
     });
 
-    const stalledPriorityLeads = leads.filter(lead => lead.priority === "High")
+    const stalledPriorityLeads = leads.filter(lead => {
+      const updatedAt = new Date(lead.updatedAt).getTime();
+
+      return(
+        lead.priority === "High" &&
+        Date.now() - updatedAt > ONE_WEEK_MS
+      )
+      
+    })
 
     const stalledLeadsCount = leads.length - forwardedLeads.length
 
@@ -44,7 +54,7 @@ const Dashboard = () => {
       <h1>Dashboard</h1>
       <section className="bg-yellow-300">
         <StatsBar stats={analytics.stats} />
-        <LeadMomentum forwardedLeads={analytics.forwardedLeads} stalledLeads={analytics.stalledLeads}/>
+        <LeadMomentum forwardedLeads={analytics.forwardedLeads} stalledLeads={analytics.stalledLeadsCount}/>
       </section>
       <FunnelComponent stats={analytics.stats} />
       <>
