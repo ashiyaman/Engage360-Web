@@ -28,7 +28,7 @@ function App() {
   }, [])
 
   return (
-    <LeadContext.Provider value={{leads: leads}}>
+    <LeadContext.Provider value={{leads: leads, setLeads}}>
     <Router basename='/'>
       <Routes>
         <Route path='/' element={<Body/>}>
