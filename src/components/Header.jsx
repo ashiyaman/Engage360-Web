@@ -1,9 +1,9 @@
 const Header = () => {
     return(
-        <header>
-            <h1>
+        <header className="text-center py-5">
+            <h2 className="text-4xl">
                 Engage 360
-            </h1>
+            </h2>
             
         </header>
     )

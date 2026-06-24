@@ -25,23 +25,16 @@ const LeadDetails = () => {
   }, [lead]);
 
   const handleEdit = () => {
-    console.log("Edit clicked");
     setIsEditing(true);
   };
 
   const handleSave = async (e) => {
     try {
       e.preventDefault();
-      console.log("Handle save is called.........");
-      console.log(e.nativeEvent.submitter);
-      console.log(formData);
-      console.trace();
-      console.log(`${BASE_URL}/leads/edit/${leadId}`);
       const response = await axios.put(
         `${BASE_URL}/leads/edit/${leadId}`,
         formData,
       );
-      console.log("Response....", response.data);
       if (response) {
         setLeads(
           leads.map((lead) => (lead._id === leadId ? response.data : lead)),

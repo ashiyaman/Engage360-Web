@@ -17,18 +17,26 @@ import LeadDetails from './components/leads/LeadDetails'
 function App() {
 
   const [leads, setLeads] = useState([])
+  const [agents, setAgents] = useState([])
 
   const fetchLeads = async() => {
       const getLeadsData = await axios.get(`${BASE_URL}/leads`)
       setLeads(getLeadsData.data)
   }
 
+  const fetchAgents = async() => {
+    const getAgentsData = await axios.get(`${BASE_URL}/agents`)
+    console.log(getAgentsData.data.data)
+    setAgents(getAgentsData.data.data)
+  }
+
   useEffect(() => {
       fetchLeads()
+      fetchAgents()
   }, [])
 
   return (
-    <LeadContext.Provider value={{leads: leads, setLeads}}>
+    <LeadContext.Provider value={{leads, setLeads, agents, setAgents}}>
     <Router basename='/'>
       <Routes>
         <Route path='/' element={<Body/>}>

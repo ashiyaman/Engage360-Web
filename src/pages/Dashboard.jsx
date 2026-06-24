@@ -9,9 +9,11 @@ import ActivityFeed from "../components/ActivityFeed";
 
 import { ONE_WEEK_MS } from "../utils/constants";
 import LeadList from "../components/leads/LeadList";
+import AddLeadForm  from "../components/leads/AddLeadForm";
 
 const Dashboard = () => {
   const { leads } = useContext(LeadContext);
+  const [showAddLeadForm, setShowLeadForm] = useState(false)
 
   //To get leads under each status
   const analytics = useMemo(() => {
@@ -49,10 +51,13 @@ const Dashboard = () => {
     }
   }, [leads]);
 
+  const handleShowLeadForm = () => {
+    setShowLeadForm(true)
+  }
+
   return (
-    <div>
-      <h1>Dashboard</h1>
-      <section className="bg-yellow-300">
+    <div className="w-full px-4">
+      <section className="py-10">
         <StatsBar stats={analytics.stats} />
         <LeadMomentum forwardedLeads={analytics.forwardedLeads} stalledLeads={analytics.stalledLeadsCount}/>
       </section>
@@ -76,6 +81,8 @@ const Dashboard = () => {
         />
       </>
       <ActivityFeed />
+      <button onClick={handleShowLeadForm}>Add Lead</button>
+      {showAddLeadForm && <AddLeadForm />}
     </div>
   );
 };
