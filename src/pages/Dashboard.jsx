@@ -40,7 +40,7 @@ const Dashboard = () => {
 
       return(
         lead.status !== "Closed" &&
-        Date.now() - updatedAt < ONE_WEEK_MS
+        Date.now() - updatedAt >= ONE_WEEK_MS
       )
     })
   
