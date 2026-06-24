@@ -32,11 +32,20 @@ const Dashboard = () => {
       return(
         lead.priority === "High" &&
         Date.now() - updatedAt > ONE_WEEK_MS
-      )
-      
+      )      
     })
 
-    const stalledLeadsCount = leads.length - forwardedLeads.length
+    const stalledLeads = leads.filter(lead => {
+      const updatedAt = new Date(lead.updatedAt).getTime();
+
+      return(
+        lead.status !== "Closed" &&
+        Date.now() - updatedAt < ONE_WEEK_MS
+      )
+    })
+  
+    console.log(stalledLeads)
+    const stalledLeadsCount = stalledLeads.length
 
     const stats = (leads || []).reduce((acc, lead) => {
       acc[lead.status] = (acc[lead.status] || 0) + 1;
@@ -59,7 +68,7 @@ const Dashboard = () => {
     <div className="w-full px-4">
       <section className="py-10">
         <StatsBar stats={analytics.stats} />
-        <LeadMomentum forwardedLeads={analytics.forwardedLeads} stalledLeads={analytics.stalledLeadsCount}/>
+        <LeadMomentum forwardedLeads={analytics.forwardedLeads.length} stalledLeads={analytics.stalledLeadsCount}/>
       </section>
       <FunnelComponent stats={analytics.stats} />
       <>

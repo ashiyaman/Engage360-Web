@@ -1,10 +1,9 @@
 import { useContext } from "react";
 import { LeadContext } from "../contexts/LeadContext";
 
-const LeadMomentum = ({ forwardedLeads, stalledLeadsCount }) => {
-  const healthy = forwardedLeads.length >= stalledLeadsCount;
-  console.log(forwardedLeads.length, stalledLeadsCount)
-  console.log(healthy)
+const LeadMomentum = ({ forwardedLeads, stalledLeads }) => {
+  const healthy = forwardedLeads >= stalledLeads;
+
   return (
     <>
       <section className="bg-white dark:bg-slate-800 rounded-xl shadow border border-gray-200 dark:border-slate-700 p-5">
@@ -16,14 +15,14 @@ const LeadMomentum = ({ forwardedLeads, stalledLeadsCount }) => {
           <div className="flex justify-between items-center">
             <p className="text-green-600">▲ Leads moved forward</p>
 
-            <span className="font-bold text-xl">{forwardedLeads.length}</span>
+            <span className="font-bold text-xl">{forwardedLeads}</span>
           </div>
 
           <div className="flex justify-between items-center">
             <p className="text-red-500">▼ Leads stalled</p>
 
             <span className="font-bold text-xl">
-              {stalledLeadsCount > 0 ? stalledLeadsCount : 0}
+              {stalledLeads > 0 ? stalledLeads : 0}
             </span>
           </div>
         </div>
