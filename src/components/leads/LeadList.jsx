@@ -3,7 +3,6 @@ import axios from "axios";
 import { LeadContext } from "../../contexts/LeadContext";
 import { FUNNEL_STAGES, BASE_URL } from "../../utils/constants";
 
-/* ─── Per-stage design tokens ────────────────────────────────────────── */
 const stageConfig = {
   New: {
     glow: "#38BDF8",
@@ -378,7 +377,7 @@ const LeadList = () => {
         <div className="e360-cols">
           {FUNNEL_STAGES.map((stage) => {
             const cfg = stageConfig[stage] || stageConfig["New"];
-            const stagLeads = leadsByStatus[stage] || [];
+            const stageLeads = leadsByStatus[stage] || [];
 
             return (
               <div
@@ -401,18 +400,18 @@ const LeadList = () => {
                     <div className="e360-stage-icon">{cfg.icon}</div>
                     <span className="e360-stage-name">{stage}</span>
                   </div>
-                  <span className="e360-count">{stagLeads.length}</span>
+                  <span className="e360-count">{stageLeads.length}</span>
                 </div>
 
                 {/* BODY */}
                 <div className="e360-body">
-                  {stagLeads.length === 0 ? (
+                  {stageLeads.length === 0 ? (
                     <div className="e360-empty">
                       <span className="e360-empty-icon">⊕</span>
                       Drop leads here
                     </div>
                   ) : (
-                    stagLeads.map((lead) => {
+                    stageLeads.map((lead) => {
                       const pCfg =
                         priorityConfig[lead.priority] || priorityConfig["Low"];
                       const initials = lead.name
