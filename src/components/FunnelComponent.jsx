@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { FUNNEL_STAGES } from "../utils/constants";
 
 const FunnelComponent = ({ stats }) => {
@@ -5,9 +6,12 @@ const FunnelComponent = ({ stats }) => {
 
   return (
     <section className="bg-white dark:bg-slate-800 rounded-xl shadow border border-gray-200 dark:border-slate-700 p-5">
-      <h2 className="text-lg font-semibold mb-5">
-        Pipeline Snapshot
-      </h2>
+      <div className="flex justify-between items-center mb-5">
+        <h2 className="text-lg font-semibold mb-5">Pipeline Snapshot</h2>
+        <Link to="/leads" className="text-sm text-blue-600 hover:underline">
+          View Pipeline →
+        </Link>
+      </div>
 
       <div className="space-y-4">
         {FUNNEL_STAGES.map((stage) => {

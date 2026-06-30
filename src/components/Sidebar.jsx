@@ -1,17 +1,40 @@
-import { Link } from "react-router-dom"
-import LeadManagement from "../pages/LeadManagement"
+import { NavLink } from "react-router-dom";
 
 const Sidebar = () => {
-    return(
-        <aside className="flex flex-col pt-25 px-5 text-left gap-3 text-lg">
-            <Link to='/dashboard'>Dashboard</Link>
-            <Link to='/leads'>Leads</Link>
-            <Link to='/sales'>Sales</Link>
-            <Link to='/agents'>Agents</Link>
-            <Link to='/reports'>Reports</Link>
-            <Link to='/settings'>Settings</Link>
-        </aside>
-    )
-}
+  const linkClass = ({ isActive }) =>
+    `rounded-lg px-4 py-2 transition ${
+      isActive
+        ? "bg-blue-600 text-white"
+        : "hover:bg-gray-100 dark:hover:bg-slate-800"
+    }`;
 
-export default Sidebar
+  return (
+    <aside className="flex flex-col gap-2 pt-5 border-r border-gray-200 dark:border-slate-700">
+      <NavLink to="/" end className={linkClass}>
+        Dashboard
+      </NavLink>
+
+      <NavLink to="/leads" className={linkClass}>
+        Leads
+      </NavLink>
+
+      <NavLink to="/sales" className={linkClass}>
+        Sales
+      </NavLink>
+
+      <NavLink to="/agents" className={linkClass}>
+        Agents
+      </NavLink>
+
+      <NavLink to="/reports" className={linkClass}>
+        Reports
+      </NavLink>
+
+      <NavLink to="/settings" className={linkClass}>
+        Settings
+      </NavLink>
+    </aside>
+  );
+};
+
+export default Sidebar;

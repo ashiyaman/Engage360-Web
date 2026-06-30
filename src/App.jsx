@@ -36,7 +36,7 @@ function App() {
   }, [])
 
   return (
-    <LeadContext.Provider value={{leads, setLeads, agents, setAgents}}>
+    <LeadContext.Provider value={{leads, setLeads, fetchLeads, agents, setAgents}}>
     <Router basename='/'>
       <Routes>
         <Route path='/' element={<Body/>}>
