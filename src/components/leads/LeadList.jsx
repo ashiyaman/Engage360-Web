@@ -3,6 +3,7 @@ import axios from "axios";
 import { LeadContext } from "../../contexts/LeadContext";
 import { FUNNEL_STAGES, BASE_URL } from "../../utils/constants";
 
+/* ─── Per-stage design tokens ────────────────────────────────────────── */
 const stageConfig = {
   New: {
     glow: "#38BDF8",
@@ -65,15 +66,40 @@ const css = `
 
   .e360-board {
     font-family: 'Inter', system-ui, sans-serif;
-    padding: 24px 4px 40px;
+    padding: 16px 4px 32px;
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
+  }
+
+  @media (min-width: 768px) {
+    .e360-board { padding: 24px 4px 40px; }
   }
 
   .e360-cols {
     display: flex;
     gap: 18px;
     min-width: max-content;
+  }
+
+  /* Mobile: stacked, full-width, no horizontal scroll */
+  @media (max-width: 639px) {
+    .e360-board {
+      overflow-x: hidden;
+    }
+    .e360-cols {
+      flex-direction: column;
+      min-width: 0;
+      width: 100%;
+      gap: 16px;
+    }
+  }
+
+  /* Small tablets: horizontal snap-scroll columns */
+  @media (min-width: 640px) and (max-width: 1023px) {
+    .e360-cols {
+      scroll-snap-type: x mandatory;
+      padding-bottom: 4px;
+    }
   }
 
   @media (min-width: 1280px) {
@@ -97,6 +123,20 @@ const css = `
     transition: border-color 0.25s, box-shadow 0.25s;
   }
 
+  @media (max-width: 639px) {
+    .e360-col {
+      width: 100%;
+      border-radius: 16px;
+    }
+  }
+
+  @media (min-width: 640px) and (max-width: 1279px) {
+    .e360-col {
+      scroll-snap-align: start;
+      flex-shrink: 0;
+    }
+  }
+
   @media (min-width: 1280px) { .e360-col { width: auto; } }
 
   .e360-col.drag-over {
@@ -106,12 +146,16 @@ const css = `
 
   /* ── Column header ── */
   .e360-header {
-    padding: 14px 16px;
+    padding: 12px 14px;
     display: flex;
     align-items: center;
     justify-content: space-between;
     position: relative;
     overflow: hidden;
+  }
+
+  @media (min-width: 768px) {
+    .e360-header { padding: 14px 16px; }
   }
 
   .e360-header::before {
@@ -178,6 +222,11 @@ const css = `
     display: flex;
     flex-direction: column;
     gap: 12px;
+  }
+
+  @media (max-width: 639px) {
+    .e360-body { min-height: 140px; padding: 12px; }
+    .e360-empty { min-height: 80px; }
   }
 
   /* ── Empty drop zone ── */
@@ -377,7 +426,7 @@ const LeadList = () => {
         <div className="e360-cols">
           {FUNNEL_STAGES.map((stage) => {
             const cfg = stageConfig[stage] || stageConfig["New"];
-            const stageLeads = leadsByStatus[stage] || [];
+            const stagLeads = leadsByStatus[stage] || [];
 
             return (
               <div
@@ -400,18 +449,18 @@ const LeadList = () => {
                     <div className="e360-stage-icon">{cfg.icon}</div>
                     <span className="e360-stage-name">{stage}</span>
                   </div>
-                  <span className="e360-count">{stageLeads.length}</span>
+                  <span className="e360-count">{stagLeads.length}</span>
                 </div>
 
                 {/* BODY */}
                 <div className="e360-body">
-                  {stageLeads.length === 0 ? (
+                  {stagLeads.length === 0 ? (
                     <div className="e360-empty">
                       <span className="e360-empty-icon">⊕</span>
                       Drop leads here
                     </div>
                   ) : (
-                    stageLeads.map((lead) => {
+                    stagLeads.map((lead) => {
                       const pCfg =
                         priorityConfig[lead.priority] || priorityConfig["Low"];
                       const initials = lead.name

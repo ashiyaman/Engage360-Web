@@ -10,7 +10,7 @@ const Body = () => {
   return (
     <div>
       <Header />
-      <div className="md:flex flex-row">
+      <div className="md:flex flex-row relative top-30">
       <div className="hidden md:block">
         <Sidebar />
       </div>

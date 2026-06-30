@@ -9,7 +9,7 @@ const Sidebar = () => {
     }`;
 
   return (
-    <aside className="flex flex-col gap-2 pt-5 border-r border-gray-200 dark:border-slate-700">
+    <aside className="flex flex-col gap-2 pt-5 md:px-8 border-r border-gray-200 dark:border-slate-700">
       <NavLink to="/" end className={linkClass}>
         Dashboard
       </NavLink>
