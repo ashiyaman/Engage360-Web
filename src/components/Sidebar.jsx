@@ -18,9 +18,9 @@ const Sidebar = () => {
         Leads
       </NavLink>
 
-      <NavLink to="/sales" className={linkClass}>
+      {/* <NavLink to="/sales" className={linkClass}>
         Sales
-      </NavLink>
+      </NavLink> */}
 
       <NavLink to="/agents" className={linkClass}>
         Agents
