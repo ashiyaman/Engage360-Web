@@ -1,7 +1,10 @@
+import LeadsPipelineChart from "../components/reports/LeadsPipelineChart"
+
 const Reports = () => {
     return(
         <div>
-            Reports
+            <h3>Reports</h3>
+            <LeadsPipelineChart />
         </div>
     )
 }
