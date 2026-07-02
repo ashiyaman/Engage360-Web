@@ -1,3 +1,4 @@
+import LeadsByStatusChart from "../components/reports/LeadsByStatusChart"
 import LeadsPipelineChart from "../components/reports/LeadsPipelineChart"
 
 const Reports = () => {
@@ -5,6 +6,7 @@ const Reports = () => {
         <div>
             <h3>Reports</h3>
             <LeadsPipelineChart />
+            <LeadsByStatusChart />
         </div>
     )
 }

@@ -17,7 +17,7 @@ const LeadsPipelineChart = () => {
       <h2>In Pipeline vs Closed</h2>
       <ResponsiveContainer>
         <PieChart>
-          <Pie dataKey="value" data={data} fill="#8884d8" label />
+          <Pie dataKey="value" data={data} fill="#8884d8" label={({ name, value }) => `${name}: ${value}`} />
         </PieChart>
       </ResponsiveContainer>
     </div>
