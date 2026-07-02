@@ -131,11 +131,23 @@ const agentListCss = `
     border: 1.5px dashed rgba(255,255,255,0.08);
     border-radius: 14px;
   }
+
+  @media (min-width: 768px) {
+  .e360-agent-list {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1280px) {
+  .e360-agent-list {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
 `;
 
 const AgentList = () => {
   const { agents } = useContext(LeadContext);
-  // Fix: single state for which agent is being edited (null = form closed)
   const [editingAgent, setEditingAgent] = useState(null);
 
   const initials = (name) =>
@@ -150,7 +162,6 @@ const AgentList = () => {
     <>
       <style>{agentListCss}</style>
 
-      {/* Edit modal — only one can be open at a time */}
       {editingAgent && (
         <AddAgentForm
           agent={editingAgent}

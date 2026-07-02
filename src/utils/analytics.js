@@ -30,11 +30,16 @@ const getAnalytics = (leads) => {
   }, {});
 }
 
+const getClosedLeads = (leads) => {
+    return leads.filter(lead => lead.status === "Closed")
+}
+
 return {
     stats: getStats(leads),
     forwardedLeads: getForwardedLeads(leads),
     stalledLeads: getStalledLeads(leads),
-    stalledPriorityLeads: getStalledPriorityLeads(leads)
+    stalledPriorityLeads: getStalledPriorityLeads(leads),
+    closedLeads: getClosedLeads(leads)
 }
 
 }
