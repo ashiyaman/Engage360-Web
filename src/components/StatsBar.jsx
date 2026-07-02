@@ -1,7 +1,12 @@
 import { useContext, useMemo } from "react";
 import { LeadContext } from "../contexts/LeadContext";
 
-const StatsBar = ({stats}) => {
+import getAnalytics from "../utils/analytics"
+
+const StatsBar = () => {
+  const {leads} = useContext(LeadContext)
+  const {stats} = getAnalytics(leads)
+  console.log(stats)
   return (
     <>
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 py-4">

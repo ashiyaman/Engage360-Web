@@ -1,8 +1,12 @@
-import { useContext } from "react";
+import { useContext, useMemo } from "react";
 import { LeadContext } from "../contexts/LeadContext";
+import getAnalytics from "../utils/analytics";
 
-const LeadMomentum = ({ forwardedLeads, stalledLeads }) => {
-  const healthy = forwardedLeads >= stalledLeads;
+const LeadMomentum = () => {
+  const {leads} = useContext(LeadContext)
+  const {forwardedLeads, stalledLeads} = getAnalytics(leads)
+
+  const healthy = forwardedLeads.length >= stalledLeads;
 
   return (
     <>
@@ -15,7 +19,7 @@ const LeadMomentum = ({ forwardedLeads, stalledLeads }) => {
           <div className="flex justify-between items-center">
             <p className="text-green-600">▲ Leads moved forward</p>
 
-            <span className="font-bold text-xl">{forwardedLeads}</span>
+            <span className="font-bold text-xl">{forwardedLeads.length}</span>
           </div>
 
           <div className="flex justify-between items-center">

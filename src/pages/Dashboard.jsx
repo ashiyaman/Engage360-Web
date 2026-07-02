@@ -276,36 +276,36 @@ const Dashboard = () => {
   const { leads } = useContext(LeadContext);
   const [showAddLeadForm, setShowLeadForm] = useState(false);
 
-  const analytics = useMemo(() => {
-    const forwardedLeads = leads.filter((lead) => {
-      const updatedAt = new Date(lead.updatedAt).getTime();
-      if (isNaN(updatedAt)) return false;
-      return lead.status !== "Closed" && Date.now() - updatedAt < ONE_WEEK_MS;
-    });
+  // const analytics = useMemo(() => {
+  //   const forwardedLeads = leads.filter((lead) => {
+  //     const updatedAt = new Date(lead.updatedAt).getTime();
+  //     if (isNaN(updatedAt)) return false;
+  //     return lead.status !== "Closed" && Date.now() - updatedAt < ONE_WEEK_MS;
+  //   });
 
-    const stalledPriorityLeads = leads.filter((lead) => {
-      const updatedAt = new Date(lead.updatedAt).getTime();
-      return lead.priority === "High" && Date.now() - updatedAt > ONE_WEEK_MS;
-    });
+  //   const stalledPriorityLeads = leads.filter((lead) => {
+  //     const updatedAt = new Date(lead.updatedAt).getTime();
+  //     return lead.priority === "High" && Date.now() - updatedAt > ONE_WEEK_MS;
+  //   });
 
-    const stalledLeads = leads.filter((lead) => {
-      const updatedAt = new Date(lead.updatedAt).getTime();
-      return lead.status !== "Closed" && Date.now() - updatedAt >= ONE_WEEK_MS;
-    });
+  //   const stalledLeads = leads.filter((lead) => {
+  //     const updatedAt = new Date(lead.updatedAt).getTime();
+  //     return lead.status !== "Closed" && Date.now() - updatedAt >= ONE_WEEK_MS;
+  //   });
 
-    const stats = (leads || []).reduce((acc, lead) => {
-      acc[lead.status] = (acc[lead.status] || 0) + 1;
-      return acc;
-    }, {});
+  //   const stats = (leads || []).reduce((acc, lead) => {
+  //     acc[lead.status] = (acc[lead.status] || 0) + 1;
+  //     return acc;
+  //   }, {});
 
-    return {
-      stats,
-      forwardedLeads,
-      stalledPriorityLeads,
-      stalledLeadsCount: stalledLeads.length,
-      closedLeadsCount: leads.length - forwardedLeads.length
-    };
-  }, [leads]);
+  //   return {
+  //     stats,
+  //     forwardedLeads,
+  //     stalledPriorityLeads,
+  //     stalledLeadsCount: stalledLeads.length,
+  //     closedLeadsCount: leads.length - forwardedLeads.length
+  //   };
+  // }, [leads]);
 
   return (
     <>
@@ -339,14 +339,11 @@ const Dashboard = () => {
         <div className="dash-analytics">
           <div className="dash-analytics-primary">
             <div className="dash-section-label">Pipeline at a glance</div>
-            <StatsBar stats={analytics.stats} />
+            <StatsBar />
           </div>
           <div className="dash-analytics-secondary">
             <div className="dash-section-label">Momentum</div>
-            <LeadMomentum
-              forwardedLeads={analytics.forwardedLeads.length}
-              stalledLeads={analytics.stalledLeadsCount}
-            />
+            <LeadMomentum />
           </div>
         </div>
 
@@ -356,15 +353,11 @@ const Dashboard = () => {
         <div className="dash-mid">
           <div className="dash-mid-funnel">
             <div className="dash-section-label">Funnel breakdown</div>
-            <FunnelComponent stats={analytics.stats} />
+            <FunnelComponent />
           </div>
           <div className="dash-mid-attention">
             <div className="dash-section-label">Needs attention</div>
-            <AttentionPanel
-              forwardedLeads={analytics.forwardedLeads}
-              stalledPriorityLeads={analytics.stalledPriorityLeads}
-              stalledLeadsCount={analytics.stalledLeadsCount}
-            />
+            <AttentionPanel/>
           </div>
         </div>
 

@@ -1,7 +1,12 @@
 import { Link } from "react-router-dom";
 import { FUNNEL_STAGES } from "../utils/constants";
+import { useContext } from "react";
+import { LeadContext } from "../contexts/LeadContext";
+import getAnalytics from "../utils/analytics";
 
-const FunnelComponent = ({ stats }) => {
+const FunnelComponent = () => {
+  const {leads} = useContext(LeadContext)
+  const {stats} = getAnalytics(leads)
   const maxCount = Math.max(...Object.values(stats), 1);
 
   return (

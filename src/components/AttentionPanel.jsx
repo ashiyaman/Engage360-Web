@@ -1,10 +1,11 @@
 import { HiExclamationTriangle, HiFire, HiArrowTrendingUp } from "react-icons/hi2";
+import getAnalytics from "../utils/analytics";
+import { useContext } from "react";
+import { LeadContext } from "../contexts/LeadContext";
 
-const AttentionPanel = ({
-  forwardedLeads,
-  stalledPriorityLeads,
-  stalledLeadsCount,
-}) => {
+const AttentionPanel = () => {
+  const {leads} = useContext(LeadContext)
+  const {forwardedLeads, stalledLeadsCount, stalledPriorityLeads} = getAnalytics(leads)
   return (
     <section className="bg-white dark:bg-slate-800 rounded-xl shadow border border-gray-200 dark:border-slate-700 p-5 my-10">
       <h2 className="text-lg font-semibold mb-5">
