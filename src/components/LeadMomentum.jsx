@@ -6,7 +6,7 @@ const LeadMomentum = () => {
   const {leads} = useContext(LeadContext)
   const {forwardedLeads, stalledLeads} = getAnalytics(leads)
 
-  const healthy = forwardedLeads.length >= stalledLeads;
+  const healthy = forwardedLeads.length >= stalledLeads.length;
 
   return (
     <>
@@ -26,7 +26,7 @@ const LeadMomentum = () => {
             <p className="text-red-500">▼ Leads stalled</p>
 
             <span className="font-bold text-xl">
-              {stalledLeads > 0 ? stalledLeads : 0}
+              {stalledLeads.length > 0 ? stalledLeads.length : 0}
             </span>
           </div>
         </div>
