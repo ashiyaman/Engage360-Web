@@ -12,7 +12,6 @@ import Sales from './pages/Sales'
 import Agents from './pages/Agents'
 import Settings from './pages/Settings'
 import Reports from './pages/Reports'
-import LeadDetails from './components/leads/LeadDetails'
 
 function App() {
 
@@ -45,7 +44,6 @@ function App() {
           <Route path='/agents' element={<Agents/>}></Route>
           <Route path='/reports' element={<Reports/>}></Route>
           <Route path='/settings' element={<Settings/>}></Route>
-          <Route path='/leads/:leadId' element={<LeadDetails />}></Route>
         </Route>
       </Routes>
     </Router>

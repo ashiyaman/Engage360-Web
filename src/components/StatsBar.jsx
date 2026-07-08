@@ -6,10 +6,9 @@ import getAnalytics from "../utils/analytics"
 const StatsBar = () => {
   const {leads} = useContext(LeadContext)
   const {stats} = getAnalytics(leads)
-  console.log(stats)
   return (
     <>
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 py-4">
+      <ul className="grid grid-cols-2 lg:grid-cols-4 gap-4 py-4">
         {Object.keys(stats).map((stat) => (
           <li key={stat}>
             <div className="bg-white dark:bg-slate-800 rounded-xl shadow p-3 border border-gray-200 dark:border-slate-700">
@@ -18,7 +17,7 @@ const StatsBar = () => {
             </div>
           </li>
         ))}
-      </div>
+      </ul>
     </>
   );
 };
