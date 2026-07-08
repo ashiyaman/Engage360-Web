@@ -3,18 +3,18 @@
 // import { LeadContext } from "../../contexts/LeadContext";
 // import { ResponsiveContainer, PieChart, Pie } from "recharts";
 
-// const LeadsPipelineChart = () => {
+// const ForwardedLeadsChart = () => {
 //     const {leads} = useContext(LeadContext)
-//     const {closedLeads} = getAnalytics(leads)
+//     const {forwardedLeads, stalledLeads} = getAnalytics(leads)
 
 //     const data = [
-//       {name: "In Pipeline", value: leads.length - closedLeads.length},
-//       {name: "Closed", value: closedLeads.length}
+//       {name: "Forwarded", value: forwardedLeads.length},
+//       {name: "Stalled", value: stalledLeads.length}
 //     ]
 
 //     return (
 //     <div style={{ width: '100%', height: 300 }}>
-//       <h2>In Pipeline vs Closed</h2>
+//       <h2>Forwarded vs Stalled leads - this week</h2>
 //       <ResponsiveContainer>
 //         <PieChart>
 //           <Pie dataKey="value" data={data} fill="#8884d8" label={({ name, value }) => `${name}: ${value}`} />
@@ -24,7 +24,8 @@
 //   );
 // }
 
-// export default LeadsPipelineChart
+// export default ForwardedLeadsChart
+
 
 
 
@@ -42,23 +43,21 @@ import {
   Legend,
 } from "recharts";
 
-const COLORS = ["#A78BFA", "#34D399"];
+const COLORS = ["#38BDF8", "#FB923C"];
 
-const LeadsPipelineChart = () => {
+const ForwardedLeadsChart = () => {
   const { leads } = useContext(LeadContext);
-  const { closedLeads } = getAnalytics(leads);
-
-  const inPipeline = (leads || []).length - closedLeads.length;
+  const { forwardedLeads, stalledLeads } = getAnalytics(leads);
 
   const data = [
-    { name: "In Pipeline", value: inPipeline },
-    { name: "Closed",      value: closedLeads.length },
+    { name: "Forwarded", value: forwardedLeads.length },
+    { name: "Stalled",   value: stalledLeads.length },
   ];
 
   return (
     <div className="rpt-card">
-      <div className="rpt-card-eyebrow">Overview</div>
-      <div className="rpt-card-title">Pipeline vs Closed</div>
+      <div className="rpt-card-eyebrow">This Week</div>
+      <div className="rpt-card-title">Forwarded vs Stalled</div>
       <div style={{ width: "100%", height: 240 }}>
         <ResponsiveContainer width="100%" height="100%">
           <PieChart>
@@ -103,4 +102,4 @@ const LeadsPipelineChart = () => {
   );
 };
 
-export default LeadsPipelineChart;
+export default ForwardedLeadsChart;

@@ -26,7 +26,6 @@ function App() {
 
   const fetchAgents = async() => {
     const getAgentsData = await axios.get(`${BASE_URL}/agents`)
-    console.log(getAgentsData.data.data)
     setAgents(getAgentsData.data.data)
   }
 
