@@ -378,7 +378,6 @@ const addLeadCss = `
   }
 `;
 
-/* ── Bug fixed: destructure properly, init formData as {}, import axios/BASE_URL/fetchLeads ── */
 const AddLeadForm = ({ onClose }) => {
   const { agents, fetchLeads } = useContext(LeadContext);
 
