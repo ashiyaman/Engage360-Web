@@ -2,7 +2,7 @@ import { useContext, useMemo, useState } from "react";
 
 import { LeadContext } from "../contexts/LeadContext";
 import StatsBar from "../components/StatsBar";
-import LeadMomentum from "../components/leadMomentum";
+import LeadMomentum from "../components/LeadMomentum";
 import FunnelComponent from "../components/FunnelComponent";
 import AttentionPanel from "../components/AttentionPanel";
 import ActivityFeed from "../components/ActivityFeed";
