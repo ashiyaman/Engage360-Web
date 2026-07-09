@@ -1,3 +1,5 @@
+import { useContext } from "react";
+
 const Settings = () => {
   const { leads, agents, fetchLeads, fetchAgents } = useContext(LeadContext);
 
