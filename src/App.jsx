@@ -5,6 +5,7 @@ import axios from 'axios'
 import {BASE_URL} from "./utils/constants"
 import { LeadContext } from './contexts/LeadContext'
 import './App.css'
+import 'react-toastify/dist/ReactToastify.css';
 import Body from './components/Body'
 import Dashboard from './pages/Dashboard'
 import LeadManagement from './pages/LeadManagement'
