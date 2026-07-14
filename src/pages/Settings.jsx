@@ -129,7 +129,7 @@ const Settings = () => {
     if (!window.confirm("Delete this lead? This cannot be undone.")) return;
     try {
       const response = await axios.delete(`${BASE_URL}/lead/${leadId}`);
-      if (response) fetchLeads();
+      if (response) await fetchLeads();
     } catch (err) {
       console.log(err);
     }
@@ -140,7 +140,10 @@ const Settings = () => {
     if (!window.confirm("Delete this agent? This cannot be undone.")) return;
     try {
       const response = await axios.delete(`${BASE_URL}/agent/${agentId}`);
-      if (response) fetchAgents();
+      if (response) {
+        await fetchAgents()
+        await fetchLeads()
+      }
     } catch (err) {
       console.log(err);
     }
