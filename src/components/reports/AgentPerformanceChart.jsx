@@ -146,9 +146,11 @@ const AgentPerformanceChart = () => {
   const { leads } = useContext(LeadContext);
   const { agentPerformance } = getAnalytics(leads);
 
-  const data = Object.values(agentPerformance).sort(
-    (a, b) => b.total - a.total
-  );
+  // const data = Object.values(agentPerformance).sort(
+  //   (a, b) => b.total - a.total
+  // );
+  const data = agentPerformance
+  console.log(data)
 
   // column maxes for proportional bar widths
   const maxTotal   = Math.max(...data.map((a) => a.total),   1);
@@ -186,7 +188,7 @@ const AgentPerformanceChart = () => {
                     {/* Agent name */}
                     <td>
                       <div className="apt-agent-cell">
-                        <div className="apt-avatar">{initials(agent?.name)}</div>
+                        <div className="apt-avatar">{agent?.name}</div>
                         <span className="apt-agent-name">{agent?.name}</span>
                       </div>
                     </td>

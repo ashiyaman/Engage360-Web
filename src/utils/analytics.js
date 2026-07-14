@@ -49,6 +49,7 @@ const getAgentPerformance = (leads) => {
     if (isStalled) acc[name].stalled += 1;
     if (lead.status === "Closed") acc[name].closed += 1;
 
+    console.log(acc)
     return acc
     }, {})
 }

@@ -474,10 +474,14 @@ const LeadList = () => {
   const [selectedLead, setSelectedLead] = useState(null);
   const [sortBy, setSortBy] = useState("");
 
+  console.log(selectedLead)
+
   const filteredLeads =
     selectedAgent === "All"
       ? leads || []
-      : (leads || []).filter((lead) => lead.salesAgent._id === selectedAgent);
+      : (leads || []).filter((lead) => {
+        return lead?.salesAgent?._id === selectedAgent
+  });
 
   const sortedLeads = [...filteredLeads].sort((a, b) => {
     if (sortBy === "priority") {

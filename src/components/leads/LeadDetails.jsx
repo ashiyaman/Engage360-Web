@@ -28,6 +28,10 @@ const LeadDetails = ({ lead, onClose }) => {
   // Fix: [] dependency — fetch once on mount, not on every comment change
   useEffect(() => { fetchComments(); }, []);
 
+  useEffect(() => {
+  setFormData(lead || {});
+}, [lead]);
+
   const fetchComments = async () => {
     try {
       const res = await axios.get(`${BASE_URL}/comments/${lead._id}`);
@@ -39,6 +43,7 @@ const LeadDetails = ({ lead, onClose }) => {
     e.preventDefault();
     try {
       const res = await axios.put(`${BASE_URL}/leads/edit/${lead._id}`, formData);
+      console.log(res)
       if (res) setLeads(leads.map((l) => (l._id === lead._id ? res.data : l)));
       setIsEditing(false);
     } catch (err) { console.log(err); }
@@ -104,9 +109,9 @@ const LeadDetails = ({ lead, onClose }) => {
                 <div className="m-field">
                   <span className="m-label">Sales Agent</span>
                   {isEditing
-                    ? <div className="m-select-wrap"><select className="m-select" value={formData?.salesAgent} onChange={set("salesAgent")}>{agents.map((agent) => 
+                    ? <div className="m-select-wrap"><select className="m-select" value={formData?.salesAgent?._id} onChange={set("salesAgent")}>{agents.map((agent) => 
                       <option key={agent._id} value={agent._id}>{agent.name}</option>)}</select></div>
-                    : <span className="m-value">{formData?.salesAgent}</span>}
+                    : <span className="m-value">{formData?.salesAgent?.name || "Not Assigned"}</span>}
                 </div>
 
                 <div className="m-field">
@@ -146,7 +151,7 @@ const LeadDetails = ({ lead, onClose }) => {
             <div className="m-footer">
               {isEditing ? (
                 <>
-                  <button type="button" className="m-btn m-btn-ghost" onClick={() => { setFormData(lead); setIsEditing(false); }}>Cancel</button>
+                  <button type="button" className="m-btn m-btn-ghost" onClick={() => { setFormData(lead || {}); setIsEditing(false); }}>Cancel</button>
                   <button type="submit" className="m-btn m-btn-primary">Save Changes</button>
                 </>
               ) : (
