@@ -474,8 +474,6 @@ const LeadList = () => {
   const [selectedLead, setSelectedLead] = useState(null);
   const [sortBy, setSortBy] = useState("");
 
-  console.log(selectedLead)
-
   const filteredLeads =
     selectedAgent === "All"
       ? leads || []

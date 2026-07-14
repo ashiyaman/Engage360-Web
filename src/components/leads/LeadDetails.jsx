@@ -43,8 +43,11 @@ const LeadDetails = ({ lead, onClose }) => {
     e.preventDefault();
     try {
       const res = await axios.put(`${BASE_URL}/leads/edit/${lead._id}`, formData);
-      console.log(res)
-      if (res) setLeads(leads.map((l) => (l._id === lead._id ? res.data : l)));
+      if (res) {
+        const updatedLead = res.data;
+        setFormData(updatedLead);
+        setLeads(leads.map((l) => (l._id === lead._id ? updatedLead : l)))
+      }
       setIsEditing(false);
     } catch (err) { console.log(err); }
   };
@@ -92,7 +95,7 @@ const LeadDetails = ({ lead, onClose }) => {
           </div>
 
           {/* AI SUMMARY */}
-          {lead && <Summary lead={lead} />}
+          {lead && <Summary lead={formData} />}
 
           {/* FIELDS */}
           <form onSubmit={handleSave}>
@@ -109,7 +112,7 @@ const LeadDetails = ({ lead, onClose }) => {
                 <div className="m-field">
                   <span className="m-label">Sales Agent</span>
                   {isEditing
-                    ? <div className="m-select-wrap"><select className="m-select" value={formData?.salesAgent?._id} onChange={set("salesAgent")}>{agents.map((agent) => 
+                    ? <div className="m-select-wrap"><select className="m-select" value={formData?.salesAgent?._id || formData?.salesAgent || ""} onChange={set("salesAgent")}>{agents.map((agent) => 
                       <option key={agent._id} value={agent._id}>{agent.name}</option>)}</select></div>
                     : <span className="m-value">{formData?.salesAgent?.name || "Not Assigned"}</span>}
                 </div>
