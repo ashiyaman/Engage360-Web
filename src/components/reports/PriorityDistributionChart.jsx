@@ -27,7 +27,7 @@ const PriorityDistributionChart = () => {
   );
 
   return (
-    <div className="rpt-card">
+    <div className="rpt-card mt-5">
       <div className="rpt-card-eyebrow">Priority</div>
       <div className="rpt-card-title">Open Leads by Priority</div>
       <div style={{ width: "100%", height: 240 }}>

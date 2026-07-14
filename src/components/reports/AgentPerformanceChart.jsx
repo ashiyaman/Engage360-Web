@@ -146,17 +146,16 @@ const AgentPerformanceChart = () => {
   const { leads } = useContext(LeadContext);
   const { agentPerformance } = getAnalytics(leads);
 
-  // const data = Object.values(agentPerformance).sort(
-  //   (a, b) => b.total - a.total
-  // );
-  const data = agentPerformance
-  console.log(data)
+  const data = Object.entries(agentPerformance)
+                     .map(([name, value]) => ({name, ...value})).sort(
+    (a, b) => b.total - a.total
+  );
 
   // column maxes for proportional bar widths
-  const maxTotal   = Math.max(...data.map((a) => a.total),   1);
-  const maxHigh    = Math.max(...data.map((a) => a.high),    1);
-  const maxStalled = Math.max(...data.map((a) => a.stalled), 1);
-  const maxClosed  = Math.max(...data.map((a) => a.closed),  1);
+  const maxTotal   = Math.max(...data?.map((a) => a.total),   1);
+  const maxHigh    = Math.max(...data?.map((a) => a.high),    1);
+  const maxStalled = Math.max(...data?.map((a) => a.stalled), 1);
+  const maxClosed  = Math.max(...data?.map((a) => a.closed),  1);
 
   const barWidth = (value, max) => `${Math.round((value / max) * 100)}%`;
 
@@ -188,7 +187,7 @@ const AgentPerformanceChart = () => {
                     {/* Agent name */}
                     <td>
                       <div className="apt-agent-cell">
-                        <div className="apt-avatar">{agent?.name}</div>
+                        <div className="apt-avatar">{initials(agent?.name)}</div>
                         <span className="apt-agent-name">{agent?.name}</span>
                       </div>
                     </td>
@@ -272,7 +271,8 @@ const AgentPerformanceChart = () => {
                       </div>
                     </td>
                   </tr>
-                ))}
+                )
+                )}
               </tbody>
             </table>
           </div>
